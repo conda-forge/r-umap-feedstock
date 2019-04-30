@@ -1,4 +1,4 @@
-{% set version = "0.2.1.0" %}
+{% set version = '0.2.1.0' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -7,7 +7,6 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: umap_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/umap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/umap/umap_{{ version }}.tar.gz
@@ -16,8 +15,6 @@ source:
 build:
   merge_build_host: True  # [win]
   number: 0
-  skip: true  # [win32]
-
   rpaths:
     - lib/R/lib/
     - lib/
@@ -29,18 +26,14 @@ requirements:
     - {{native}}toolchain        # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
-    - {{posix}}sed  # [win]
-    - {{posix}}coreutils  # [win]
     - {{posix}}sed               # [win]
     - {{posix}}coreutils         # [win]
     - {{posix}}zip               # [win]
-
   host:
     - r-base
     - r-rspectra
     - r-rcpp >=0.12.6
     - r-reticulate
-
   run:
     - r-base
     - {{native}}gcc-libs         # [win]
@@ -66,9 +59,26 @@ about:
 
 extra:
   recipe-maintainers:
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
     - apcamargo
+    - conda-forge/r
+
+# Package: umap
+# Title: Uniform Manifold Approximation and Projection
+# Version: 0.2.1.0
+# Authors@R:  person("Tomasz", "Konopka", , "tokonopka@gmail.com", role = c("aut", "cre"))
+# Author: Tomasz Konopka [aut, cre]
+# Maintainer: Tomasz Konopka <tokonopka@gmail.com>
+# Description: Uniform manifold approximation and projection is a technique for dimension reduction. The algorithm was described by McInnes and Healy (2018) in <arXiv:1802.03426>. This package provides an interface for two implementations. One is written from scratch, including components for nearest-neighbor search and for embedding. The second implementation is a wrapper for 'python' package 'umap-learn' (requires separate installation, see vignette for more details).
+# Depends: R (>= 3.1.2)
+# Imports: methods, reticulate, Rcpp (>= 0.12.6), RSpectra, stats
+# License: MIT + file LICENSE
+# URL: https://github.com/tkonopka/umap
+# LinkingTo: Rcpp
+# LazyData: true
+# Suggests: knitr, rmarkdown, testthat
+# VignetteBuilder: knitr
+# RoxygenNote: 6.1.1
+# NeedsCompilation: yes
+# Packaged: 2019-04-30 05:37:02 UTC; tkonopka
+# Repository: CRAN
+# Date/Publication: 2019-04-30 07:20:03 UTC
