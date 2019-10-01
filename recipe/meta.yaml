@@ -1,4 +1,4 @@
-{% set version = "0.2.2.0" %}
+{% set version = '0.2.3.1' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,21 +10,21 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/umap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/umap/umap_{{ version }}.tar.gz
-  sha256: 61d8a4be1d4787853f073ab1376c5d3f219ac885cbc97cd981078de05fe202e9
+  sha256: cd1c398fa93bb7342c657cc593700d323d2ab6ba42ede256e0c1b224800eff67
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - {{ compiler('c') }}        # [not win]
-    - {{ compiler('cxx') }}      # [not win]
+    - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
-    - {{ compiler('m2w64_cxx') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
     - {{posix}}sed               # [win]
@@ -34,12 +34,14 @@ requirements:
     - r-base
     - r-rspectra
     - r-rcpp >=0.12.6
+    - r-openssl
     - r-reticulate
   run:
     - r-base
     - {{native}}gcc-libs         # [win]
     - r-rspectra
     - r-rcpp >=0.12.6
+    - r-openssl
     - r-reticulate
 
 test:
@@ -57,6 +59,9 @@ about:
     is a wrapper for 'python' package 'umap-learn' (requires separate installation,
     see vignette for more details).
   license_family: MIT
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/MIT'
+    - LICENSE
 
 extra:
   recipe-maintainers:
@@ -65,13 +70,13 @@ extra:
 
 # Package: umap
 # Title: Uniform Manifold Approximation and Projection
-# Version: 0.2.1.0
-# Authors@R:  person("Tomasz", "Konopka", , "tokonopka@gmail.com", role = c("aut", "cre"))
+# Version: 0.2.3.1
+# Authors@R: person("Tomasz", "Konopka", , "tokonopka@gmail.com", role = c("aut", "cre"))
 # Author: Tomasz Konopka [aut, cre]
 # Maintainer: Tomasz Konopka <tokonopka@gmail.com>
 # Description: Uniform manifold approximation and projection is a technique for dimension reduction. The algorithm was described by McInnes and Healy (2018) in <arXiv:1802.03426>. This package provides an interface for two implementations. One is written from scratch, including components for nearest-neighbor search and for embedding. The second implementation is a wrapper for 'python' package 'umap-learn' (requires separate installation, see vignette for more details).
 # Depends: R (>= 3.1.2)
-# Imports: methods, reticulate, Rcpp (>= 0.12.6), RSpectra, stats
+# Imports: methods, openssl, reticulate, Rcpp (>= 0.12.6), RSpectra, stats
 # License: MIT + file LICENSE
 # URL: https://github.com/tkonopka/umap
 # LinkingTo: Rcpp
@@ -80,6 +85,6 @@ extra:
 # VignetteBuilder: knitr
 # RoxygenNote: 6.1.1
 # NeedsCompilation: yes
-# Packaged: 2019-04-30 05:37:02 UTC; tkonopka
+# Packaged: 2019-08-21 05:27:37 UTC; tkonopka
 # Repository: CRAN
-# Date/Publication: 2019-04-30 07:20:03 UTC
+# Date/Publication: 2019-08-21 12:40:08 UTC
