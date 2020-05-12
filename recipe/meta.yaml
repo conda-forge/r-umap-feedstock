@@ -1,4 +1,4 @@
-{% set version = "0.2.4.1" %}
+{% set version = "0.2.5.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/umap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/umap/umap_{{ version }}.tar.gz
-  sha256: 6a774e2443356930f5faf1fe6a945016c296273de95cfcb5153fc288361cd0de
+  sha256: 2d41d6a1fc23f45b44c7d5a3a6397e26df81eb939e0a28b0b1135967e0fae862
 
 build:
-  merge_build_host: True  # [win]
-  number: 1
+  merge_build_host: true  # [win]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -52,15 +52,11 @@ test:
 about:
   home: https://github.com/tkonopka/umap
   license: MIT
-  summary: Uniform manifold approximation and projection is a technique for dimension reduction.
-    The algorithm was described by McInnes and Healy (2018) in <arXiv:1802.03426>. This
-    package provides an interface for two implementations. One is written from scratch,
-    including components for nearest-neighbor search and for embedding. The second implementation
-    is a wrapper for 'python' package 'umap-learn' (requires separate installation,
-    see vignette for more details).
+  summary: Uniform manifold approximation and projection is a technique for dimension reduction. The algorithm was described by McInnes and Healy (2018) in <arXiv:1802.03426>. This package provides an interface for two implementations. One is written from scratch, including components for nearest-neighbor search and for
+    embedding. The second implementation is a wrapper for 'python' package 'umap-learn' (requires separate installation, see vignette for more details).
   license_family: MIT
   license_file:
-    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/MIT'
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
     - LICENSE
 
 extra:
