@@ -1,4 +1,4 @@
-{% set version = "0.2.6.0" %}
+{% set version = "0.2.7.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/umap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/umap/umap_{{ version }}.tar.gz
-  sha256: 2e690143d61e31cea5c0b2e6276ac4fa762d30f9bbd02ee964ba8033b5b0527d
+  sha256: 4b49210efef68abf196895e54acfc5844dd107e938fce40dc86a014d90bf3ba4
 
 build:
   merge_build_host: true  # [win]
